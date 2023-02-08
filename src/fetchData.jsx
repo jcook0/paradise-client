@@ -1279,7 +1279,7 @@ function compare( a, b ) {
 //imitates an API call using fetch
 function fetchData(params) {
     let states = json.fetchparadise3Response.Results["Result 1"]["Row"].length;
-    let newJson = json.fetchparadise3Response.Results["Result 1"]["Row"];
+    let newJson = { ... json}.fetchparadise3Response.Results["Result 1"]["Row"]; //clones states json object
 
     let g = params
 
@@ -1291,13 +1291,12 @@ function fetchData(params) {
          + jsonObj.injscore*g.environment + jsonObj.publicschoolscore*g.education + jsonObj.prvschoolscore*g.education
 
         newJson[i].score2 = score
-        newJson[i].paradisescore = score / json.fetchparadise3Response.Results["Result 1"]["Row"][i].paradisescore
+        newJson[i].paradisescore = score
         newJson[i].statename= newJson[i].statename.trimEnd();
     }
 
     newJson.sort(compare)
 
-    console.log(newJson)
 
     const obj = newJson[0];
 
